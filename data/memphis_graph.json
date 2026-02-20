@@ -1,0 +1,32 @@
+{
+    "Memphis": {
+        "Nashville": 15, 
+        "Atlanta": 10,
+        "Mobile": 7,
+        "New Orleans": 3
+        },
+    "Nashville": {
+        "Memphis": 15,
+        "Atlanta": 2
+        },
+    "Atlanta": {
+        "Nashville": 2,
+        "Memphis": 10,
+        "Mobile": 2,
+        "Savannah": 1
+        },
+    "Savannah": {
+        "Atlanta": 1,
+        "Mobile": 6
+        },
+    "Mobile": {
+        "Savannah": 6,
+        "Atlanta": 2,
+        "Memphis": 7,
+        "New Orleans": 3
+        },
+    "New Orleans": {
+        "Mobile": 3,
+        "Memphis": 3
+        }
+}
