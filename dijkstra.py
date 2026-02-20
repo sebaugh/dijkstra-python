@@ -18,6 +18,12 @@ def dijkstra(graph, start, end=None):
 
     :return: tuple of the shortest distance and the list of nodes from start to end
     '''
+    # check if the start and end nodes are in the graph
+    if start not in graph:
+        raise ValueError(f"Start node {start} not in graph")
+    if end is not None and end not in graph:
+        raise ValueError(f"End node {end} not in graph")
+
     #dictionary to store the distances from the start to other nodes
     distances = {node: float('inf') for node in graph}
     distances[start] = 0
