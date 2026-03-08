@@ -1,5 +1,6 @@
 import pandas as pd
 import json
+import heapq
 
 # Dijkstra algorith implementation in Python
 # logic: shortest path from A to B
@@ -27,39 +28,35 @@ def dijkstra(graph, start, end=None):
     #dictionary to store the distances from the start to other nodes
     distances = {node: float('inf') for node in graph}
     distances[start] = 0
-    visited = set()
+ 
 
     # dictionary to store the previous nodes in the path
     previous_nodes = {node: None for node in graph}
 
-    while len(visited) < len(graph):
+    heap = [(0, start)]  # min-heap seeded with the start node
+    visited = set()  # set to keep track of visited nodes
 
-        #initialize the smallest distance and the current node
-        smallest_distance = float('inf')
-        current_node = None
+    while heap:
+        #initialize the current distance and node
+        current_dist, current_node = heapq.heappop(heap)
 
-        # find the non visited node with the smallest distance
-        for node in graph:
-            if node not in visited and distances[node] < smallest_distance:
-
-                # updated the smallest distance and the current node
-                smallest_distance = distances[node]
-                current_node = node
-
-        # if no node found break the loop
-        if current_node is None:
-            break
+        if current_node in visited:
+            continue
 
         # add the node to visited
         visited.add(current_node)
 
+        if end is not None and current_node == end:
+            break
+
         # update the distances of the neighbors
         for neighbour, dist in graph[current_node].items():
             if neighbour not in visited:
-                new_dist = distances[current_node] + dist
+                new_dist = current_dist + dist
                 if new_dist < distances[neighbour]:
                     distances[neighbour] = new_dist
                     previous_nodes[neighbour] = current_node
+                    heapq.heappush(heap, (new_dist, neighbour))
 
     if end is not None:
         if distances[end] == float('inf'):
